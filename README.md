@@ -11,6 +11,6 @@ make
 # make install step doesn't exist yet
 ```
 
-`dumpfile-to-text` will convert a binary dump into a text format. `dumpfile-to-text --help` for help; output format is described in the source code.
+`dumpfile-to-text` will convert a binary dump into a text format. `dumpfile-to-text --help` for help; output format is described in the source code. It will currently only run from the source directory, because of a hardcoded path to the channel map files. Fixes welcome.
 
 `check-timestamps /path/to/binary/file.bin` will check that all of the frame timestamps in `file.bin` are contiguous (ie, that they are separated by 25 ticks).
