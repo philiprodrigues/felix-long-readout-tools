@@ -15,7 +15,7 @@
 void print_channel_numbers(FILE* f, const dune::FelixFrame* frame)
 {
     PdspChannelMapService channelMapService;
-    fprintf(f, "                  ");
+    fprintf(f, "0x0               ");
     for(int i=0; i<256; ++i){
         fprintf(f, "% 6d ", channelMapService.getOfflineChannel(frame, i));
     }
@@ -29,7 +29,7 @@ void print_channel_numbers(FILE* f, const dune::FelixFrame* frame)
 //
 // The output format is:
 //
-//                ch0     ch1     ch2 ...
+// 0x0            ch0     ch1     ch2 ...
 // timestamp0    adc0    adc1    adc2 ...
 // timestamp1    adc0    adc1    adc2 ...
 // ...
