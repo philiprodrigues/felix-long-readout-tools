@@ -26,7 +26,7 @@ class PdspChannelMapService {
 
 public:
 
-    PdspChannelMapService(std::string, std::string);
+    PdspChannelMapService();
 
   typedef enum _FelixOrRCE
   {

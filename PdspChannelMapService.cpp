@@ -12,13 +12,24 @@
 #include <stdexcept>
 #include <sstream>
 
+namespace
+{
+    const char* felix_channelmap_text=
+#include "protoDUNETPCChannelMap_FELIX_v4.txt"
+      ;
+
+    const char* rce_channelmap_text=
+#include "protoDUNETPCChannelMap_RCE_v4.txt"
+      ;
+}
+
 // Bad channel value
 unsigned int bad() {
   unsigned int val = std::numeric_limits<unsigned int>::max();
   return val;
 }
 
-PdspChannelMapService::PdspChannelMapService(std::string rcename, std::string felixname) {
+PdspChannelMapService::PdspChannelMapService() {
 
   fBadCrateNumberWarningsIssued = 0;
   fBadSlotNumberWarningsIssued = 0;
@@ -27,10 +38,10 @@ PdspChannelMapService::PdspChannelMapService(std::string rcename, std::string fe
   fASICWarningsIssued = 0;
   fASICChanWarningsIssued = 0;
 
-  std::ifstream inFile(rcename, std::ios::in);
-  if(inFile.bad() || inFile.fail() || !inFile.is_open()){
-      throw std::runtime_error(std::string("Bad file ")+std::string(rcename));
-  }
+  std::istringstream inFile(rce_channelmap_text);
+  // if(inFile.bad() || inFile.fail() || !inFile.is_open()){
+  //     throw std::runtime_error(std::string("Bad file ")+std::string(rcename));
+  // }
   std::string line;
 
   while (std::getline(inFile,line)) {
@@ -77,12 +88,12 @@ PdspChannelMapService::PdspChannelMapService(std::string rcename, std::string fe
     fvPlaneMap[offlineChannel] = planeType;
 
   }
-  inFile.close();
+  //inFile.close();
 
-  std::ifstream FELIXinFile(felixname, std::ios::in);
-  if(FELIXinFile.bad() || FELIXinFile.fail() || !FELIXinFile.is_open()){
-      throw std::runtime_error(std::string("Bad file ")+std::string(felixname));
-  }
+  std::istringstream FELIXinFile(felix_channelmap_text);
+  // if(FELIXinFile.bad() || FELIXinFile.fail() || !FELIXinFile.is_open()){
+  //     throw std::runtime_error(std::string("Bad file ")+std::string(felixname));
+  // }
 
   while (std::getline(FELIXinFile,line)) {
     unsigned int crateNo, slotNo, fiberNo, FEMBChannel, StreamChannel, slotID, fiberID, chipNo, chipChannel, asicNo, asicChannel, planeType, offlineChannel;
@@ -128,7 +139,7 @@ PdspChannelMapService::PdspChannelMapService(std::string rcename, std::string fe
     fFELIXvPlaneMap[offlineChannel] = planeType;
 
   }
-  inFile.close();
+  //inFile.close();
 
   // APA numbering -- hardcoded here.
   // Installation numbering:

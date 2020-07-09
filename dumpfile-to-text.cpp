@@ -14,7 +14,7 @@
 //======================================================================
 void print_channel_numbers(FILE* f, const dune::FelixFrame* frame)
 {
-    PdspChannelMapService channelMapService("protoDUNETPCChannelMap_RCE_v4.txt", "protoDUNETPCChannelMap_FELIX_v4.txt");
+    PdspChannelMapService channelMapService;
     fprintf(f, "                  ");
     for(int i=0; i<256; ++i){
         fprintf(f, "% 6d ", channelMapService.getOfflineChannel(frame, i));
